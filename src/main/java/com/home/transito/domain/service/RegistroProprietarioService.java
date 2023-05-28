@@ -29,4 +29,10 @@ public class RegistroProprietarioService {
     public void excluir(Long proprietarioId) {
         proprietarioRepository.deleteById(proprietarioId);
     }
+
+    public Proprietario buscar(Long proprietarioId) {
+        return proprietarioRepository.findById(proprietarioId)
+                       .orElseThrow(() -> new NegocioException("Proprietário não encontrado"));
+    }
 }
+
