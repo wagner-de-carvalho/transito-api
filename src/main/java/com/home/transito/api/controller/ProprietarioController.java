@@ -1,5 +1,6 @@
 package com.home.transito.api.controller;
 
+import com.home.transito.domain.exception.NegocioException;
 import com.home.transito.domain.model.Proprietario;
 import com.home.transito.domain.repository.ProprietarioRepository;
 import com.home.transito.domain.service.RegistroProprietarioService;
@@ -56,5 +57,10 @@ public class ProprietarioController {
         }
         registroProprietarioService.excluir(proprietarioId);
         return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(NegocioException.class)
+    public ResponseEntity<String> capturar(NegocioException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
