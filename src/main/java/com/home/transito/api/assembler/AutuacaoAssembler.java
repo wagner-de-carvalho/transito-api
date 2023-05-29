@@ -27,8 +27,7 @@ public class AutuacaoAssembler {
     }
 
     public List<AutuacaoModel> toCollectionModel(List<Autuacao> autuacoes) {
-        return autuacoes
-                       .stream()
+        return autuacoes.stream()
                        .map(this::toModel)
                        .toList();
     }

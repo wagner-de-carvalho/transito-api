@@ -22,7 +22,7 @@ public class ProprietarioController {
     private final RegistroProprietarioService registroProprietarioService;
 
     @GetMapping
-    public List<Proprietario> testar() {
+    public List<Proprietario> listar() {
         return proprietarioRepository.findAll();
     }
 
