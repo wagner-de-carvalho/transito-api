@@ -1,9 +1,9 @@
 package com.home.transito.domain.service;
 
+import com.home.transito.domain.exception.EntidadeNaoEncontradaException;
 import com.home.transito.domain.exception.NegocioException;
 import com.home.transito.domain.model.StatusVeiculo;
 import com.home.transito.domain.model.Veiculo;
-import com.home.transito.domain.repository.ProprietarioRepository;
 import com.home.transito.domain.repository.VeiculoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class RegistroVeiculoService {
 
     public Veiculo buscar(Long veiculoId) {
         return veiculoRepository.findById(veiculoId)
-                       .orElseThrow(() -> new NegocioException("Veículo não encontrado"));
+                       .orElseThrow(() -> new EntidadeNaoEncontradaException("Veículo não encontrado"));
     }
 
     @Transactional
