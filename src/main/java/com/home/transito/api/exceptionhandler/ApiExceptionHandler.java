@@ -1,6 +1,9 @@
 package com.home.transito.api.exceptionhandler;
 
 import com.home.transito.domain.exception.NegocioException;
+import lombok.AllArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
@@ -17,8 +20,11 @@ import java.net.URI;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
+
+    private final MessageSource messageSource;
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
@@ -29,7 +35,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         Map<String, String> fields = ex.getBindingResult().getAllErrors()
                                              .stream()
                                              .collect(Collectors.toMap(objectError -> ((FieldError) objectError).getField(),
-                                                     DefaultMessageSourceResolvable::getDefaultMessage));
+                                                     objectError -> messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
         problemDetail.setProperty("fields", fields);
 
         return handleExceptionInternal(ex, problemDetail, headers, status, request);
