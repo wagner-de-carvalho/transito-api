@@ -1,5 +1,6 @@
 package com.home.transito.api.controller;
 
+import com.home.transito.api.model.VeiculoModel;
 import com.home.transito.domain.exception.NegocioException;
 import com.home.transito.domain.model.Veiculo;
 import com.home.transito.domain.repository.VeiculoRepository;
@@ -25,8 +26,12 @@ public class VeiculoController {
     }
 
     @GetMapping("/{veiculoId}")
-    public ResponseEntity<Veiculo> buscar(@PathVariable Long veiculoId) {
+    public ResponseEntity<VeiculoModel> buscar(@PathVariable Long veiculoId) {
         return veiculosRepository.findById(veiculoId)
+                       .map(veiculo -> {
+                           var veiculoModel = new VeiculoModel();
+                           return veiculoModel;
+                       })
                        .map(ResponseEntity::ok)
                        .orElse(ResponseEntity.notFound().build());
     }
