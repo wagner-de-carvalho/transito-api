@@ -1,5 +1,6 @@
 package com.home.transito.domain.model;
 
+import com.home.transito.domain.validation.ValidationGroups;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Entity
 //@Table(name = "tb_proprietario")
 public class Proprietario {
-    @NotNull
+    @NotNull(groups = ValidationGroups.ProprietarioId.class)
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
