@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 @Setter
 public class VeiculoModel {
     private Long id;
-    private String nomeProprietario;
+    private ProprietarioResumoModel proprietario;
     private String marca;
     private String modelo;
     private String numeroPlaca;

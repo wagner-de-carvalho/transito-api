@@ -1,6 +1,7 @@
 package com.home.transito.api.controller;
 
 import com.home.transito.api.assembler.VeiculoAssembler;
+import com.home.transito.api.model.VeiculoInput;
 import com.home.transito.api.model.VeiculoModel;
 import com.home.transito.domain.model.Veiculo;
 import com.home.transito.domain.repository.VeiculoRepository;
@@ -36,8 +37,11 @@ public class VeiculoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public VeiculoModel cadastrar(@Valid @RequestBody Veiculo veiculo) {
-        return veiculoAssembler.toModel(registroVeiculoService.cadastrar(veiculo));
+    public VeiculoModel cadastrar(@Valid @RequestBody VeiculoInput veiculoInput) {
+        Veiculo novoVeiculo = veiculoAssembler.toEntity(veiculoInput);
+        Veiculo veiculoCadastrado = registroVeiculoService.cadastrar(novoVeiculo);
+
+        return veiculoAssembler.toModel(veiculoCadastrado);
     }
 
 }

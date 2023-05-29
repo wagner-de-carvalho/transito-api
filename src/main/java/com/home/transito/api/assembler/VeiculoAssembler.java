@@ -1,5 +1,6 @@
 package com.home.transito.api.assembler;
 
+import com.home.transito.api.model.VeiculoInput;
 import com.home.transito.api.model.VeiculoModel;
 import com.home.transito.domain.model.Veiculo;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,10 @@ import java.util.stream.Collectors;
 public class VeiculoAssembler {
 
     private final ModelMapper modelMapper;
+
+    public Veiculo toEntity(VeiculoInput veiculoInput) {
+        return modelMapper.map(veiculoInput, Veiculo.class);
+    }
 
     public VeiculoModel toModel(Veiculo veiculo) {
         return modelMapper.map(veiculo, VeiculoModel.class);
