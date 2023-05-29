@@ -7,6 +7,7 @@ import com.home.transito.domain.repository.VeiculoRepository;
 import com.home.transito.domain.service.RegistroVeiculoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.List;
 public class VeiculoController {
     private final VeiculoRepository veiculosRepository;
     private final RegistroVeiculoService registroVeiculoService;
+    private final ModelMapper modelMapper;
 
     @GetMapping
     public List<Veiculo> listar() {
@@ -28,10 +30,7 @@ public class VeiculoController {
     @GetMapping("/{veiculoId}")
     public ResponseEntity<VeiculoModel> buscar(@PathVariable Long veiculoId) {
         return veiculosRepository.findById(veiculoId)
-                       .map(veiculo -> {
-                           var veiculoModel = new VeiculoModel();
-                           return veiculoModel;
-                       })
+                       .map(veiculo -> modelMapper.map(veiculo, VeiculoModel.class))
                        .map(ResponseEntity::ok)
                        .orElse(ResponseEntity.notFound().build());
     }
