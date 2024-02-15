@@ -8,13 +8,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.carvalho.transito.domain.model.Proprietario;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
 @RestController
 @RequestMapping("/proprietarios")
 public class ProprietarioController {
 
+    @PersistenceContext
+    private EntityManager manager;
+
     @GetMapping()
     public List<Proprietario> listar() {
-        return List.of();
+        return manager.createQuery("from Proprietario", Proprietario.class)
+                .getResultList();
     }
 
 }
