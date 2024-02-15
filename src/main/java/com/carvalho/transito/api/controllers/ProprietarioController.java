@@ -14,20 +14,7 @@ public class ProprietarioController {
 
     @GetMapping()
     public List<Proprietario> listar() {
-        var p1 = new Proprietario()
-                .builder()
-                .email("acme@mail.com")
-                .id(2L)
-                .nome("Acme")
-                .build();
-        var p2 = new Proprietario()
-                .builder()
-                .id(1L)
-                .email("plim@mail.com")
-                .nome("Plim")
-                .build();
-        return List.of(p1, p2);
-
+        return List.of();
     }
 
 }
