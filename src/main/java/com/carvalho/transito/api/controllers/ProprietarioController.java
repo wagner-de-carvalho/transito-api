@@ -7,21 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carvalho.transito.domain.model.Proprietario;
+import com.carvalho.transito.domain.repository.ProprietarioRepository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/proprietarios")
+@AllArgsConstructor
 public class ProprietarioController {
 
-    @PersistenceContext
-    private EntityManager manager;
+    private ProprietarioRepository proprietarioRepository;
 
     @GetMapping()
     public List<Proprietario> listar() {
-        return manager.createQuery("from Proprietario", Proprietario.class)
-                .getResultList();
+        return proprietarioRepository.findAll();
     }
 
 }
