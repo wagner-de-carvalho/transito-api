@@ -1,3 +1,3 @@
 # Trânsito
 
-- continuar 3.9. Implementando Query Methods no repositório
+- continuar 4.2. Validando entrada de dados com Jakarta Bean Validation

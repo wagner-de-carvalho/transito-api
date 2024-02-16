@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carvalho.transito.domain.model.Proprietario;
 import com.carvalho.transito.domain.repository.ProprietarioRepository;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -40,7 +41,7 @@ public class ProprietarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Proprietario adicionar(@RequestBody Proprietario proprietario) {
+    public Proprietario adicionar(@Valid @RequestBody Proprietario proprietario) {
         return proprietarioRepository.save(proprietario);
     }
 
