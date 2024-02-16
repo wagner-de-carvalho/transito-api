@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.carvalho.transito.domain.exception.NegocioException;
 import com.carvalho.transito.domain.model.StatusVeiculo;
 import com.carvalho.transito.domain.model.Veiculo;
-import com.carvalho.transito.domain.repository.ProprietarioRepository;
 import com.carvalho.transito.domain.repository.VeiculoRepository;
 
 import lombok.AllArgsConstructor;
