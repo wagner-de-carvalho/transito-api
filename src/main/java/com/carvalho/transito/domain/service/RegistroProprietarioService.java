@@ -15,20 +15,27 @@ public class RegistroProprietarioService {
     private final ProprietarioRepository proprietarioRepository;
 
     @Transactional
-    public Proprietario salvar(Proprietario proprietario) {
-        boolean emailEmUso = proprietarioRepository.findByEmail(proprietario.getEmail())
-                .filter(p -> !p.equals(proprietario))
+    public Proprietario salvar(Proprietario novoProprietario) {
+        boolean emailEmUso = proprietarioRepository.findByEmail(novoProprietario.getEmail())
+                .filter(p -> !p.equals(
+                        novoProprietario))
                 .isPresent();
 
         if (emailEmUso) {
             throw new NegocioException("E-mail já cadastrado");
         }
-        return proprietarioRepository.save(proprietario);
+        return proprietarioRepository.save(novoProprietario);
     }
 
     @Transactional
     public void excluir(Long proprietarioId) {
         proprietarioRepository.deleteById(proprietarioId);
+    }
+
+    public Proprietario buscar(Long proprietarioId) {
+        return this.proprietarioRepository.findById(
+                proprietarioId)
+                .orElseThrow(() -> new NegocioException("Proprietário não encontrado"));
     }
 
 }

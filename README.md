@@ -1,3 +1,3 @@
 # Trânsito
 
-- continuar 4.2. Validando entrada de dados com Jakarta Bean Validation
+- continuar 4.10. Implementando regras de negócio no cadastro de veículos
