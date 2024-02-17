@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.carvalho.transito.domain.exception.NegocioException;
-import com.carvalho.transito.domain.model.Proprietario;
 import com.carvalho.transito.domain.model.StatusVeiculo;
 import com.carvalho.transito.domain.model.Veiculo;
 import com.carvalho.transito.domain.repository.VeiculoRepository;
