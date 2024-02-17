@@ -5,7 +5,6 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carvalho.transito.api.model.VeiculoModel;
-import com.carvalho.transito.domain.exception.NegocioException;
 import com.carvalho.transito.domain.model.Veiculo;
 import com.carvalho.transito.domain.repository.VeiculoRepository;
 import com.carvalho.transito.domain.service.RegistroVeiculoService;
