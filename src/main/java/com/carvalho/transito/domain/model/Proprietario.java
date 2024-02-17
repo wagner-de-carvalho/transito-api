@@ -22,7 +22,7 @@ public class Proprietario {
     private Long id;
 
     @NotBlank
-    @Size(max = 60)
+    @Size(min = 2, max = 60)
     private String nome;
 
     @NotBlank

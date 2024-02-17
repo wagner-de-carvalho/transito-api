@@ -3,7 +3,8 @@ package com.carvalho.transito.api.exceptionhandler;
 import java.net.URI;
 import java.util.stream.Collectors;
 
-import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.carvalho.transito.domain.exception.NegocioException;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @RestControllerAdvice
 public class ApiExceptionHanlder extends ResponseEntityExceptionHandler {
+    private final MessageSource messageSource;
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
@@ -33,7 +38,7 @@ public class ApiExceptionHanlder extends ResponseEntityExceptionHandler {
                 .stream()
                 .collect(Collectors.toMap(
                         objectError -> ((FieldError) objectError).getField(),
-                        DefaultMessageSourceResolvable::getDefaultMessage));
+                        objectError -> messageSource.getMessage(objectError, LocaleContextHolder.getLocale())));
 
         problemDetail.setProperty("fields", fields);
 
