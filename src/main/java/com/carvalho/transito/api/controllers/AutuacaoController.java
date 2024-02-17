@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carvalho.transito.api.assembler.AutuacaoAssembler;
 import com.carvalho.transito.api.model.AutuacaoModel;
 import com.carvalho.transito.api.model.input.AutuacaoInput;
-import com.carvalho.transito.domain.model.Autuacao;
 import com.carvalho.transito.domain.service.RegistroAutuacaoService;
 
 import jakarta.validation.Valid;
