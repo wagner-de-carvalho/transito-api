@@ -18,7 +18,7 @@ public class VeiculoModel {
 
     private String modelo;
 
-    private String placa;
+    private String numeroPlaca;
 
     private StatusVeiculo status;
 
