@@ -4,6 +4,8 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.carvalho.transito.domain.exception.NegocioException;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -49,6 +51,30 @@ public class Veiculo {
         getAutuacoes().add(autuacao);
 
         return autuacao;
+    }
+
+    public void apreender() {
+        if (estaApreendido()) {
+            throw new NegocioException("Veículo já se encontra apreendido");
+        }
+        setStatus(StatusVeiculo.APREENDIDO);
+        setDataApreensao(OffsetDateTime.now());
+    }
+
+    public void removerApreensao() {
+        if (naoEstaApreendido()) {
+            throw new NegocioException("Veículo não está apreendido");
+        }
+        setStatus(StatusVeiculo.REGULAR);
+        setDataApreensao(null);
+    }
+
+    public boolean estaApreendido() {
+        return StatusVeiculo.APREENDIDO.equals(this.getStatus());
+    }
+
+    public boolean naoEstaApreendido() {
+        return !estaApreendido();
     }
 
 }
