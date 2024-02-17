@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.carvalho.transito.api.assembler.VeiculoAssembler;
 import com.carvalho.transito.api.model.VeiculoModel;
-import com.carvalho.transito.domain.model.Veiculo;
+import com.carvalho.transito.api.model.input.VeiculoInput;
 import com.carvalho.transito.domain.repository.VeiculoRepository;
 import com.carvalho.transito.domain.service.RegistroVeiculoService;
 
@@ -45,8 +45,10 @@ public class VeiculoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public VeiculoModel cadastrar(@Valid @RequestBody Veiculo veiculo) {
-        return veiculoAssembler.toModel(registroVeiculoService.cadastrar(veiculo));
+    public VeiculoModel cadastrar(@Valid @RequestBody VeiculoInput veiculoInput) {
+        var novoVeiculo = veiculoAssembler.toEntity(veiculoInput);
+        var veiculoCadastrado = registroVeiculoService.cadastrar(novoVeiculo);
+        return veiculoAssembler.toModel(veiculoCadastrado);
     }
 
 }
