@@ -1,6 +1,6 @@
 package com.carvalho.transito.domain.service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +37,7 @@ public class RegistroVeiculoService {
 
         novoVeiculo.setProprietario(proprietario);
         novoVeiculo.setStatus(StatusVeiculo.REGULAR);
-        novoVeiculo.setDataCadastro(LocalDateTime.now());
+        novoVeiculo.setDataCadastro(OffsetDateTime.now());
 
         return veiculoRepository.save(novoVeiculo);
     }
