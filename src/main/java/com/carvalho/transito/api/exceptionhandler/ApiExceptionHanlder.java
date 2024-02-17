@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.carvalho.transito.domain.exception.EntidadeNaoEncontradaException;
 import com.carvalho.transito.domain.exception.NegocioException;
 
 import lombok.AllArgsConstructor;
@@ -50,6 +51,14 @@ public class ApiExceptionHanlder extends ResponseEntityExceptionHandler {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         problemDetail.setTitle(e.getMessage());
         problemDetail.setType(URI.create("https://transito-api.com.br/erros/regra-de-negocio"));
+        return problemDetail;
+    }
+
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ProblemDetail handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problemDetail.setTitle(e.getMessage());
+        problemDetail.setType(URI.create("https://transito-api.com.br/erros/nao-encontrado"));
         return problemDetail;
     }
 
